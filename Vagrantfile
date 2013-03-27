@@ -7,13 +7,13 @@ Vagrant::Config.run do |config|
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
-  
+   config.vm.provision :shell, :path => "run_setup_as_user.sh"
   
   
 end
 
 
-Vagrant.configure("2") do |config|
+#Vagrant.configure("2") do |config|
   # other config here
-  config.vm.provision :shell, :path => "run_setup_as_user.sh"
-end
+  #config.vm.provision :shell, :path => "run_setup_as_user.sh"
+#end
