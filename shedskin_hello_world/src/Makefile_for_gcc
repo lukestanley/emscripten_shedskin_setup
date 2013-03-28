@@ -1,0 +1,29 @@
+SHEDSKIN_LIBDIR=../shedskin_src/shedskin/lib
+CC=g++
+CCFLAGS=-O2 -march=native -Wno-deprecated $(CPPFLAGS) -I. -I${SHEDSKIN_LIBDIR}
+LFLAGS=-lgc -lpcre $(LDFLAGS)
+
+CPPFILES=hello.cpp \
+	${SHEDSKIN_LIBDIR}/re.cpp \
+	${SHEDSKIN_LIBDIR}/builtin.cpp
+
+HPPFILES=hello.hpp \
+	${SHEDSKIN_LIBDIR}/re.hpp \
+	${SHEDSKIN_LIBDIR}/builtin.hpp
+
+all:	hello
+
+hello:	$(CPPFILES) $(HPPFILES)
+	$(CC)  $(CCFLAGS) $(CPPFILES) $(LFLAGS) -o hello
+
+hello_prof:	$(CPPFILES) $(HPPFILES)
+	$(CC) -pg -ggdb $(CCFLAGS) $(CPPFILES) $(LFLAGS) -o hello_prof
+
+hello_debug:	$(CPPFILES) $(HPPFILES)
+	$(CC) -g -ggdb $(CCFLAGS) $(CPPFILES) $(LFLAGS) -o hello_debug
+
+clean:
+	rm -f hello hello_prof hello_debug
+
+.PHONY: all clean
+
