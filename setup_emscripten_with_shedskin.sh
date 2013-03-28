@@ -1,9 +1,9 @@
 #!/bin/bash
-export user=$(whoami)
-echo $user
-cd ~
-touch test_in_home_of_vagrant_user
+if [ -d "/vagrant" ]; then
+	cd ~
+fi
 
+export BASEDIRECTORY=$(pwd)
 
 sudo apt-get -y install g++ cmake build-essential libffi-dev git openjdk-6-jdk nodejs nodejs-legacy libgc-dev libpcre++-dev libpcre3-dev
 
@@ -13,7 +13,7 @@ git clone git://gitorious.org/shedskin/mainline.git
 mv mainline shedskin_src
 cd shedskin_src/
 sudo python setup.py install
-cd ..
+cd $BASEDIRECTORY
 mkdir shedtest
 cd shedtest
 echo 'print "hello from shedskin"' >> hello.py
@@ -21,39 +21,39 @@ python hello.py
 shedskin hello.py
 make
 ./hello
-cd ~
+cd $BASEDIRECTORY
 
 
 tar -xvzf clang+llvm-3.2-x86-linux-ubuntu-12.04.tar.gz 
 
 mv clang+llvm-3.2-x86-linux-ubuntu-12.04 clang_and_llvm
 
-export PATH=$PATH:~/clang_and_llvm/bin
+export PATH=$PATH:$BASEDIRECTORY/clang_and_llvm/bin
 echo $PATH
-cd ~
+
 mkdir llvm_test
 cd llvm_test
 
-clang ~/emscripten/tests/hello_world.c -o hello_world
+clang $BASEDIRECTORY/emscripten/tests/hello_world.c -o hello_world
 
 ./hello_world
 
-clang -O3 -emit-llvm ~/emscripten/tests/hello_world.c -c -o hello_world.bc
+clang -O3 -emit-llvm $BASEDIRECTORY/emscripten/tests/hello_world.c -c -o hello_world.bc
 
 lli hello_world.bc
 
-export PATH=$PATH:~/emscripten
+export PATH=$PATH:$BASEDIRECTORY/emscripten
 
 emcc
 
-emcc ~/emscripten/tests/hello_world.cpp
+emcc $BASEDIRECTORY/emscripten/tests/hello_world.cpp
 
 node a.out.js
 
-#emcc ~/emscripten/tests/hello_world_sdl.cpp -o hello.html
+#emcc $BASEDIRECTORY/emscripten/tests/hello_world_sdl.cpp -o hello.html
 
 
-cd ~
+cd $BASEDIRECTORY
 mkdir shedskin_js
 cd shedskin_js
 echo 'print "hello from shedskin in JS"' >> hello.py
@@ -63,7 +63,11 @@ if [ -d "/vagrant" ]; then
 	cp /vagrant/shedskin_Makefile Makefile
 	patch ../shedskin_src/shedskin/lib/builtin.hpp < /vagrant/builtin.hpp.patch
 fi
-export PATH=$PATH:~/emscripten
+if [ ! -d "/vagrant" ]; then
+    cp $BASEDIRECTORY/shedskin_Makefile Makefile
+    patch ../shedskin_src/shedskin/lib/builtin.hpp < $BASEDIRECTORY/builtin.hpp.patch
+fi
+export PATH=$PATH:$BASEDIRECTORY/emscripten
 make
 
 
