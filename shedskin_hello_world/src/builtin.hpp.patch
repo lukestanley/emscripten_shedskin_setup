@@ -1,0 +1,13 @@
+--- /home/luke/Desktop/old_builtin.hpp	2013-03-26 16:36:28.047605073 -0700
++++ /home/luke/Desktop/new_builtin.hpp	2013-03-26 16:36:19.299080741 -0700
+@@ -7,8 +7,8 @@
+ #include <Python.h>
+ #endif
+ 
+-#include <gc/gc_allocator.h>
+-#include <gc/gc_cpp.h>
++#include "system/include/gc_allocator.h"
++#include "system/include/gc_cpp.h"
+ 
+ #include <vector>
+ #include <deque>
