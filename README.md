@@ -1,5 +1,8 @@
 This repro contains a bash script that runs inside vagrant and also for ubuntu directly, setting up everything needed to see why Shedskin won't yet compile under Emscripten, and later, hopefully to ... actually compile :)
 
+
+shedskin_hello_world contains a subset of the files created in the vagrant, that may be tested and built against independently. (for that one, cd into the src folder and make should show throw "fatal error:'system/include/gc_allocator.h' file not found").
+
 ---
 Usage:
 ---
