@@ -1,0 +1,13 @@
+--- builtin.hpp.orig	2013-04-05 16:23:01.000000000 +0530
++++ builtin.hpp	2013-04-05 12:42:58.000000000 +0530
+@@ -7,8 +7,8 @@
+ #include <Python.h>
+ #endif
+ 
+-#include "system/include/gc_allocator.h"
+-#include "system/include/gc_cpp.h"
++#include <gc_allocator.h>
++#include <gc_cpp.h>
+ 
+ #include <vector>
+ #include <deque>

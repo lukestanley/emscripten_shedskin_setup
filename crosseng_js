@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo $1
+export ORIGINDIRECTORY=$(pwd)
+cp $1 $VAGRANTDIR/animation/
+cd $VAGRANTDIR
+a=$1
+xpath=${a%/*} 
+xbase=${a##*/}
+xfext=${xbase##*.}
+xpref=${xbase%.*}
+echo "~/scripts/wipe_load_and_cd.sh; cd animation; pwd; ~/scripts/build_py_game_in_js.py $xbase" | vagrant ssh
+cp $VAGRANTDIR/Output.html $ORIGINDIRECTORY
+google-chrome $ORIGINDIRECTORY/Output.html
+chromium-browser $ORIGINDIRECTORY/Output.html

@@ -1,0 +1,18 @@
+STEPS:
+
+1. Copy /usr/include/gc/gc_cpp.h and /usr/include/gc/gc_allocator.h to ./emscripten/system/include/ (This is the sys lib path for emcc compiler)
+
+2. Apply gc_cpp.h.patch to ./emscripten/system/include/gc_cpp.h
+
+3. Goto /usr/local/lib/python2.7/dist-packages/shedskin/lib/ and apply the following patches
+		builtin.cpp.patch
+		builtin.hpp.patch
+
+4. Go to /usr/local/lib/python2.7/dist-packages/shedskin/lib/builtin/ and apply the following pathces
+		complex.cpp.patch
+		complex.hpp.patch
+
+Compile commands:
+export SHEDSKIN_LIBDIR=/usr/local/lib/python2.7/dist-packages/shedskin/lib
+shedskin filename.py
+./emscripten/emcc filename.cpp $SHEDSKIN_LIBDIR/builtin.cpp -I $SHEDSKIN_LIBDIR

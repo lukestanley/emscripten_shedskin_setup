@@ -1,0 +1,46 @@
+--- gc_cpp.h.orig	2013-04-04 15:07:56.427310000 +0530
++++ gc_cpp.h	2013-04-05 13:58:10.665581000 +0530
+@@ -198,12 +198,12 @@
+     Instances of classes derived from "gc" will be allocated in the 
+     collected heap by default, unless an explicit NoGC placement is
+     specified. */
+-
++/*
+ class gc_cleanup: virtual public gc {public:
+     inline gc_cleanup();
+     inline virtual ~gc_cleanup();
+ private:
+-    inline static void GC_cdecl cleanup( void* obj, void* clientData );};
++    inline static void GC_cdecl cleanup( void* obj, void* clientData );};*/
+     /*
+     Instances of classes derived from "gc_cleanup" will be allocated
+     in the collected heap by default.  When the collector discovers an
+@@ -332,7 +332,7 @@
+     
+ #endif /* GC_OPERATOR_NEW_ARRAY */
+ 
+-
++/*
+ inline gc_cleanup::~gc_cleanup() {
+     GC_register_finalizer_ignore_self( GC_base(this), 0, 0, 0, 0 );}
+ 
+@@ -350,6 +350,7 @@
+         &oldProc, &oldData );
+       if (0 != oldProc) {
+         GC_register_finalizer_ignore_self( base, oldProc, oldData, 0, 0 );}}}
++        */
+ 
+ inline void* operator new( 
+     size_t size, 
+@@ -361,9 +362,9 @@
+ 
+     if (gcp == UseGC) {
+         obj = GC_MALLOC( size );
+-        if (cleanup != 0) 
++      /* if (cleanup != 0) 
+             GC_REGISTER_FINALIZER_IGNORE_SELF( 
+-                obj, cleanup, clientData, 0, 0 );}
++                obj, cleanup, clientData, 0, 0 );*/}
+     else if (gcp == PointerFreeGC) {
+         obj = GC_MALLOC_ATOMIC( size );}
+     else {

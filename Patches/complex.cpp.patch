@@ -1,0 +1,29 @@
+--- complex.cpp.orig	2013-04-05 16:27:11.000000000 +0530
++++ complex.cpp	2013-04-04 17:51:55.000000000 +0530
+@@ -4,17 +4,17 @@
+ 
+ complex mcomplex(str *s) {
+     complex c;
+-    __re__::match_object *m;
+-    __re__::re_object *p;
++    //__re__::match_object *m;
++    //__re__::re_object *p;
+ 
+-    p = __re__::compile(new str("(?P<one>[+-]?([\\d\\.]+e[+-]?\\d+|[\\d\\.]*)j?)(?P<two>[+-]?([\\d\\.]+e[+-]?\\d+|[\\d\\.]*)j?)?$"));
+-    m = p->match(s->strip());
+-    if (___bool(m)) {
+-        c = (c.parsevalue(m->group(1, new str("one")))) + (c.parsevalue(m->group(1, new str("two"))));
+-    }
+-    else {
++    //p = __re__::compile(new str("(?P<one>[+-]?([\\d\\.]+e[+-]?\\d+|[\\d\\.]*)j?)(?P<two>[+-]?([\\d\\.]+e[+-]?\\d+|[\\d\\.]*)j?)?$"));
++    //m = p->match(s->strip());
++    //if (___bool(m)) {
++    //    c = (c.parsevalue(m->group(1, new str("one")))) + (c.parsevalue(m->group(1, new str("two"))));
++    //}
++    //else {
+         throw ((new ValueError(new str("complex() arg is a malformed string"))));
+-    }
++    //}
+     return c;
+ }
+ 

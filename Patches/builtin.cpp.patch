@@ -1,0 +1,31 @@
+--- builtin.cpp.orig	2013-04-05 16:23:18.000000000 +0530
++++ builtin.cpp	2013-04-05 14:02:09.000000000 +0530
+@@ -1,7 +1,7 @@
+ /* Copyright 2005-2011 Mark Dufour and contributors; License Expat (See LICENSE) */
+ 
+ #include "builtin.hpp"
+-#include "re.hpp"
++//#include "re.hpp"
+ #include <climits>
+ #include <cmath>
+ #include <numeric>
+@@ -35,16 +35,16 @@
+ dict<void *, void *> *__ss_proxy;
+ #endif
+ 
+-void gc_warning_handler(char *msg, GC_word arg) {
++/*void gc_warning_handler(char *msg, GC_word arg) {
+ #ifndef __SS_NOGCWARNS
+     printf(msg, arg);
+     printf("(use a 64-bit system to possibly avoid GC warnings, or use shedskin -g to disable them)\n");
+ #endif
+-}
++}*/
+ 
+ void __init() {
+     GC_INIT();
+-    GC_set_warn_proc(gc_warning_handler);
++   // GC_set_warn_proc(gc_warning_handler);
+ 
+ #ifdef __SS_BIND
+ #ifndef __SS_PYPY
