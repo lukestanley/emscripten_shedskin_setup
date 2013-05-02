@@ -25,7 +25,7 @@ mv clang+llvm-3.2-x86-linux-ubuntu-12.04 clang_and_llvm
 #wget http://dl.dropbox.com/u/33191825/Patches.tar.gz
 #tar -xvzf Patches.tar.gz
 #cp -rf /vagrant/cached_downloads/emscripten ./
-git clone git://github.com/kripken/emscripten.git
+git clone git://github.com/lukestanley/emscripten.git
 #cp -rf /vagrant/cached_downloads/mainline ./
 
 #cp -rf /vagrant/cached_downloads/clang_and_llvm $BASEDIRECTORY/clang_and_llvm
@@ -76,8 +76,8 @@ node a.out.js
 
 
 cd $BASEDIRECTORY
-cp /usr/include/gc/gc_cpp.h ./emscripten/system/include/
-cp /usr/include/gc/gc_allocator.h ./emscripten/system/include/
+#cp /usr/include/gc/gc_cpp.h ./emscripten/system/include/
+#cp /usr/include/gc/gc_allocator.h ./emscripten/system/include/
 
 if [ -d "/vagrant" ]; then
         #cp /vagrant/shedskin_Makefile Makefile
@@ -89,7 +89,7 @@ if [ ! -d "/vagrant" ]; then
 fi
 
 
-patch ./emscripten/system/include/gc_cpp.h Patches/gc_cpp.h.patch 
+#patch ./emscripten/system/include/gc_cpp.h Patches/gc_cpp.h.patch 
 patch ./shedskin_src/shedskin/lib/builtin.cpp Patches/builtin.cpp.patch 
 patch ./shedskin_src/shedskin/lib/builtin.hpp Patches/builtin.hpp.patch 
 patch ./shedskin_src/shedskin/lib/builtin/complex.cpp Patches/complex.cpp.patch 
